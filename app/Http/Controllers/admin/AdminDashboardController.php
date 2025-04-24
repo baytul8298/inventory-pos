@@ -12,7 +12,12 @@ class AdminDashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.layout.dashboard');
+        return view('admin.dashboard.main_dashboard');
+    }
+
+    public function purchaseModule()
+    {
+        return view('admin.dashboard.purchase_dashboard');
     }
     
     public function branchAccess(Request $request)

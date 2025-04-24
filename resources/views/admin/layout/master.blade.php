@@ -52,7 +52,7 @@
                 <!--{ app header end }-->
 
                 <!--{ app sidebar start }-->
-                @include('admin.layout.sidebar')
+                
                 <!--{ app sidebar end }-->
 
                 <!--{ app content start }-->

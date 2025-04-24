@@ -3,6 +3,8 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
+@include('admin.dashboard.inc.main_sidebar')
+
 <div class="main-content app-content mt-0">
     <div class="side-app">
         <!-- Container Start -->
@@ -29,23 +31,25 @@
             <div class="row g-4 justify-content-center text-center">
                 @php
                     $modules = [
-                        ['icon' => 'bi-plus-lg', 'label' => 'Sales Module'],
-                        ['icon' => 'bi-truck', 'label' => 'Purchase Module'],
-                        ['icon' => 'bi-cash-coin', 'label' => 'Accounts Module'],
-                        ['icon' => 'bi-person', 'label' => 'HR & Payroll'],
-                        ['icon' => 'bi-bar-chart', 'label' => 'Reports Module'],
-                        ['icon' => 'bi-gear', 'label' => 'Administration'],
-                        ['icon' => 'bi-display', 'label' => 'Business Monitor'],
-                        ['icon' => 'bi-box-arrow-right', 'label' => 'LogOut'],
+                        ['icon' => 'bi-plus-lg', 'label' => 'Sales Module', 'url' => '/sales'],
+                        ['icon' => 'bi-truck', 'label' => 'Purchase Module', 'url' => '/module/purchase'],
+                        ['icon' => 'bi-cash-coin', 'label' => 'Accounts Module', 'url' => '/accounts'],
+                        ['icon' => 'bi-person', 'label' => 'HR & Payroll', 'url' => '/hr'],
+                        ['icon' => 'bi-bar-chart', 'label' => 'Reports Module', 'url' => '/reports'],
+                        ['icon' => 'bi-gear', 'label' => 'Administration', 'url' => '/admin'],
+                        ['icon' => 'bi-display', 'label' => 'Business Monitor', 'url' => '/monitor'],
+                        ['icon' => 'bi-box-arrow-right', 'label' => 'LogOut', 'url' => '/logout'],
                     ];
                 @endphp
 
                 @foreach($modules as $module)
                     <div class="col-md-3 col-sm-6">
-                        <div class="module-box d-flex flex-column align-items-center justify-content-center text-white">
-                            <i class="bi {{ $module['icon'] }} fs-1 mb-2 fa-2xl"></i>
-                            <h5 class="fw-bold mb-0">{{ $module['label'] }}</h5>
-                        </div>
+                        <a href="{{ $module['url'] ?? '#' }}" class="text-decoration-none">
+                            <div class="module-box d-flex flex-column align-items-center justify-content-center text-white">
+                                <i class="bi {{ $module['icon'] }} fs-1 mb-2 fa-2xl"></i>
+                                <h5 class="fw-bold mb-0">{{ $module['label'] }}</h5>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
