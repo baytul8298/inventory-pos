@@ -37,10 +37,12 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="side1">
                                         <ul class="sidemenu-list">
-                                            <li class="side-menu-label1"><a href="javascript:void(0)">Category</a></li>
-                                            <li><a href="app-kanban.html" class="slide-item">Unit</a></li>
-                                            <li><a href="calendar.html" class="slide-item">Product</a></li>
-                                            <li><a href="app-calendar.html" class="slide-item">Supplier</a></li>
+                                            <li><a href="app-kanban.html" class="slide-item">Units</a></li>
+                                            <li><a href="app-kanban.html" class="slide-item">Categories</a></li>
+                                            <li><a href="app-kanban.html" class="slide-item">Brands</a></li>
+                                            <li><a href="calendar.html" class="slide-item">Warrenties</a></li>
+                                            <li><a href="calendar.html" class="slide-item">Products</a></li>
+                                            <li><a href="app-calendar.html" class="slide-item">Suppliers</a></li>
                                         </ul>
                                     </div>
                                 </div>
