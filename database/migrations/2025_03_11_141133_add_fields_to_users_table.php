@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('user_id')->unique()->after('id'); 
             $table->string('user_type')->after('user_id'); 
-            $table->string('verifycode')->nullable()->after('user_type');
+            $table->unsignedBigInteger('branch_id')->nullable()->after('user_type'); 
+            $table->string('verifycode')->nullable()->after('branch_id');
             $table->string('image')->nullable()->after('verifycode');
             $table->string('status')->after('image'); 
+
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('set null');
         });
     }
 
