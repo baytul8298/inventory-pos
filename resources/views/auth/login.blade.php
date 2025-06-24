@@ -1,144 +1,227 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-
-
-<!-- Mirrored from dev.techneinfosys.com/html/adminixor/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Feb 2025 20:39:02 GMT -->
 <head>
     <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Adminixor – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Techne Infosys">
+    <meta name="description" content="Sindabad.com limited">
+    <meta name="author" content="Sindabad.com Ltd.">
     <meta name="keywords"
-        content="admin template, Adminixor admin template, dashboard template, flat admin template, responsive admin template, web app">
-
-    <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="https://dev.techneinfosys.com/html/adminixor/assets/images/brand/favicon.ico">
-
-    <!-- TITLE -->
+          content="Distributor portal, Seller portal, Sindabad">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
     <title>Login | {{ config('app.name') }}</title>
-        
-    <link id="style" href="{{ asset('admin/assets/css/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+    <link id="style" href="{{ asset('admin/assets/css/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/css/plugins.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/switcher/css/switcher.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('admin/assets/switcher/demo.css') }}" rel="stylesheet"/>
 
-    <!-- STYLE CSS -->
-    <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet" />
-    <!-- Plugins CSS -->
-    <link href="{{ asset('admin/assets/css/plugins.css') }}" rel="stylesheet" />
-    <!--- FONT-ICONS CSS -->
-    <link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet" />
+    <style>
+        .auth-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .login-card {
+            background: #fdfdfd;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            padding: 60px 40px 120px 40px;
+            animation: fadeIn 0.8s ease-in-out;
+            border: none !important;
+        }
 
-    <!-- INTERNAL Switcher css -->
-    <link href="{{ asset('admin/assets/switcher/css/switcher.css') }}" rel="stylesheet" />
-    <link href="{{ asset('admin/assets/switcher/demo.css') }}" rel="stylesheet" />
+        .logo {
+            width: 220px;
+            margin-bottom: 50px;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .input-icon input {
+            padding-left: 45px;
+            height: 48px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .input-icon input:focus {
+            background: #fff;
+            border-color: #2F89A1;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            font-size: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
-<body class="app sidebar-mini ltr light-mode login-img">
-    <div class="">
-        <!-- PAGE -->
-        <div class="page auth-page">
-            <div class="">
-                <!-- Theme-Layout -->
+<body class="app sidebar-mini ltr light-mode">
+<div class="auth-wrapper">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
 
-                <!-- CONTAINER OPEN -->
-                <div class="login-container">
-                    <div class="card login-wrap-main  p-6">
-                        <div class="text-center mb-5 auth-logo">
-                            <a href="index.html">
-                                <img src="{{ asset('admin/assets/images/brand/logo-white.png') }}" class="header-brand-img light-logo" alt="">
-                                <img src="{{ asset('admin/assets/images/brand/logo-dark.png') }}" class="header-brand-img dark-logo" alt="">
-                            </a>
-                        </div>
-                        <span class="login-form-title"> Login </span>
-                        @if ($errors->any())
-                            <div class="alert alert-primary alert-dismissible fade show text-danger" role="alert">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
-                            </div>
-                        @endif
-                        <form class="login-form validate-form" method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <div class="wrap-input validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
-                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                    <i class="zmdi zmdi-email" aria-hidden="true"></i>
-                                </a>
-                                <input class="input100 border-start-0 ms-0 form-control" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="wrap-input validate-input input-group" id="Password-toggle">
-                                <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                                    <i class="zmdi zmdi-eye-off" aria-hidden="true"></i>
-                                </a>
-                                <input class="input100 border-start-0 ms-0 form-control" type="password" name="password" placeholder="Password">
-                            </div>
-                            <label class="custom-control custom-checkbox mt-4">
-                                <input type="checkbox" class="custom-control-input">
-                                <span class="custom-control-label">Agree the <a href="#">terms and policy</a></span>
-                            </label>
-                            <div class="container-login100-form-btn">
-                                <button type="submit" class="login100-form-btn btn btn-primary">Log In <i class="fas fa-sign-in-alt ms-1"></i></button>
-                            </div>
-                            <div class="text-center pt-3">
-                                <p class="text-dark mb-0 d-inline-flex">Already have account ?<a href="authentication-signin.html" class="text-primary ms-1">Sign In</a></p>
-                            </div>
-                            <label class="login-social-icon"><span>Register with Social</span></label>
-                            <div class="d-flex justify-content-center">
-                                <a href="javascript:void(0)">
-                                    <div class="social-login me-4 text-center">
-                                        <i class="fa fa-google"></i>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="social-login me-4 text-center">
-                                        <i class="fa fa-facebook"></i>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="social-login text-center">
-                                        <i class="fa fa-twitter"></i>
-                                    </div>
-                                </a>
-                            </div>
-                        </form>
+                <div class="card login-card">
+
+                    <div class="text-center mb-4">
+                        <a href="index.html">
+                            <img src="{{ asset('admin/assets/images/brand/logo-white.png') }}" class="header-brand-img light-logo" alt="">
+                            <img src="{{ asset('admin/assets/images/brand/logo-dark.png') }}" class="header-brand-img dark-logo" alt="">
+                        </a>
                     </div>
+
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <h6 class="text-center" style="color: #c8c8c8; margin-bottom: 20px">Sign In</h6>
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="zmdi zmdi-email"></i>
+                                <input type="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+                            @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-icon">
+                                <i class="zmdi zmdi-lock"></i>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                                <span toggle="#password" class="toggle-password zmdi zmdi-eye"></span>
+                            </div>
+                            @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+
+
+                        <button type="submit" id="login-button" class="btn w-100 mt-3 py-1" style="background: #2F89A1; color: white;">
+                            <span class="button-text" style="font-size: 14px">Log In</span>
+                            <span class="button-loading" style="display: none;">Processing...</span>
+                            <i class="fas fa-sign-in-alt ms-1"></i>
+                        </button>
+
+                        @if (session('message'))
+                            <small class="text-{{ session('error') ? 'danger' : 'success' }}">
+                                {{ session('message') }}
+                            </small>
+                        @endif
+
+                        <div class="text-center pt-2">
+                            <p class="text-muted mb-0">New Here? <a href="#" style="color: #2F89A1; font-weight: bold">Create a Seller Account</a></p>
+                        </div>
+                    </form>
                 </div>
-                <!-- CONTAINER CLOSED -->
             </div>
         </div>
-        <!-- End PAGE -->
     </div>
+</div>
 
 
-    <!--{ JQUERY JS }-->
-    <script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
-    <!-- Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <!--{ BOOTSTRAP JS }-->
-    <script src="{{ asset('admin/assets/js/plugins/bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!-- Perfect SCROLLBAR JS-->
-    <script src="{{ asset('admin/assets/js/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
-    <!--{ Color Theme js }-->
-    <script src="{{ asset('admin/assets/js/themeColors.js') }}"></script>
-    <!-- { Show Password js } -->
-    <script src="{{ asset('admin/assets/js/show-password.min.js') }}"></script>
-    <!--{ Custom-switcher }-->
-    <script src="{{ asset('admin/assets/js/custom-swicher.js') }}"></script>
-    <!--{ Switcher js }-->
-    <script src="{{ asset('admin/assets/switcher/js/switcher.js') }}"></script>
-    <script src="{{ asset('admin/assets/switcher/js/fontawesome.js') }}"></script>
-    <script>
-        $('#branch').select2({
-            placeholder: "Select Branch",
-            allowClear: true
+<script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/plugins/bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/plugins/p-scroll/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('admin/assets/js/plugins/notifier/notifier.js') }}"></script>
+<script src="{{ asset('admin/assets/js/notification.js') }}"></script>
+<script src="{{ asset('admin/assets/js/themeColors.js') }}"></script>
+<script src="{{ asset('admin/assets/js/show-password.min.js') }}"></script>
+<script src="{{ asset('admin/assets/js/custom-swicher.js') }}"></script>
+<script src="{{ asset('admin/assets/switcher/js/switcher.js') }}"></script>
+<script src="{{ asset('admin/assets/switcher/js/fontawesome.js') }}"></script>
+<script>
+    // $('#branch').select2({
+    //     placeholder: "Select Branch",
+    //     allowClear: true
+    // });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const togglePassword = document.querySelector('.toggle-password');
+        const passwordField = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.classList.toggle('zmdi-eye');
+            this.classList.toggle('zmdi-eye-off');
         });
-    </script>
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const button = document.querySelector('#login-button');
+        const buttonText = button.querySelector('.button-text');
+        const buttonLoading = button.querySelector('.button-loading');
+
+        form.addEventListener('submit', function () {
+            button.disabled = true;
+            buttonText.style.display = 'none';
+            buttonLoading.style.display = 'inline-block';
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var message = "{{ session('message') }}";
+        var isError = "{{ session('error') }}";
+
+        if (!window.performance || window.performance.navigation.type !== window.performance.navigation.TYPE_BACK_FORWARD) {
+            if (message !== "") {
+                if (isError === "1" || isError === "true") {
+                    notifier.show('Oops!', message, 'danger', "{{ asset('admin/assets/images/notification/high_priority-48.png') }}", 10000);
+                } else {
+                    notifier.show('Success!', message, 'success', "{{ asset('admin/assets/images/notification/ok-48.png') }}", 10000);
+                }
+            }
+        }
+    });
+</script>
 </body>
-
-
-<!-- Mirrored from dev.techneinfosys.com/html/adminixor/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Feb 2025 20:39:02 GMT -->
 </html>

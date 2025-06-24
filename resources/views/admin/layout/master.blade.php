@@ -20,8 +20,6 @@
         <link id="style" href="{{ asset('admin/assets/css/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
         <!-- STYLE CSS -->
         <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet" />
-        <!-- Font Awesome 6 CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <!-- Plugins CSS -->
         <link href="{{ asset('admin/assets/css/plugins.css') }}" rel="stylesheet" />
         <!--- FONT-ICONS CSS -->
@@ -30,7 +28,11 @@
         <!-- INTERNAL Switcher css -->
         <link href="{{ asset('admin/assets/switcher/css/switcher.css') }}" rel="stylesheet" />
         <link href="{{ asset('admin/assets/switcher/demo.css') }}" rel="stylesheet" />
-        <style></style>
+        <link href="{{ asset('admin/assets/css/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet">
+        <style>
+
+        </style>
+
         @yield('style')
     </head>
     <body class="app sidebar-mini ltr light-mode">
@@ -113,6 +115,13 @@
         <!--{ Select2 js }-->
         <script src="{{ asset('admin/assets/js/plugins/select2/select2.full.min.js') }}"></script>
         <script src="{{ asset('admin/assets/js/plugins/select2/select2.init.js') }}"></script>
+        <!--{ classic editor   js }-->
+        <script src="{{ asset('admin/assets/js/plugins/ckeditor/classic/ckeditor.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/ckeditor/classic/classic.init.js') }}"></script>
+
+        <!--{ form select  js }-->
+        <script src="{{ asset('admin/assets/js/form-select.js') }}"></script>
+
         <!--{  INTERNAL Data tables js }-->
         <script src="{{ asset('admin/assets/js/plugins/datatable/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('admin/assets/js/plugins/datatable/dataTables.bootstrap5.min.js') }}"></script>
@@ -126,6 +135,9 @@
         <!--{ INTERNAL Vector js }-->
         <script src="{{ asset('admin/assets/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
         <script src="{{ asset('admin/assets/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+        <!--{ form datepicker  js }-->
+        <script src="{{ asset('admin/assets/js/plugins/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/form-datepicker.js') }}"></script>
         <!--{ SIDE-MENU JS }-->
         <script src="{{ asset('admin/assets/js/plugins/sidemenu/sidemenu.js') }}"></script>
         <!--{ INTERNAL INDEX JS }-->
@@ -138,6 +150,21 @@
         <script src="{{ asset('admin/assets/js/custom-swicher.js') }}"></script>
         <!--{ Switcher js }-->
         <script src="{{ asset('admin/assets/switcher/js/switcher.js') }}"></script>
+        <!--{ Notifier js }-->
+        <script src="{{ asset('admin/assets/js/plugins/notifier/notifier.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/notification.js') }}"></script>
+        <!--{ Sweet alert }-->
+        <script src="{{ asset('admin/assets/js/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/sweet-alert.js') }}"></script>
+        <!-- FILE UPLOADES JS -->
+        <script src="{{ asset('admin/assets/js/plugins/fileuploads/js/fileupload.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fileuploads/js/file-upload.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+        <script src="{{ asset('admin/assets/js/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css" />
         <script>
             $(function () {
                 $.ajaxSetup({
@@ -145,77 +172,26 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                
-                var message = '{{ session('message') }}';
-                var error = '{{ session('error') }}';
-
-                if (!window.performance || window.performance.navigation.type != window.performance.navigation.TYPE_BACK_FORWARD) {
-                    if (message != '')
-                        $(document).Toasts('create', {
-                            icon: 'fas fa-envelope fa-lg',
-                            class: 'bg-success',
-                            title: 'Success',
-                            autohide: true,
-                            delay: 3000,
-                            body: message
-                        })
-
-                    if (error != ''){
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: error,
-                        })
-
-                        $(document).Toasts('create', {
-                            icon: 'fas fa-envelope fa-lg',
-                            class: 'bg-danger',
-                            title: 'Error',
-                            autohide: true,
-                            delay: 3000,
-                            body: error
-                        })
-                    }
-
-                }
-            });
-
-            $(document).ready(function () {
-                $(".branch-link").on("click", function (e) {
-                    e.preventDefault();
-
-                    let branchId = $(this).data("id");
-                    //alert(branchId);
-                    let branchName = $(this).data("name");
-
-                    $("#modalTitle").text("Branch: " + branchName);
-                    $("#branchId").val(branchId);
-                    $("#modaldemo8").modal("show");
-                });
-
-                $(".branchAccess").on("click", function () {
-                    let branchId = $("#branchId").val();
-                    //alert(branchId);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('branch_access') }}",
-                        data: {
-                            branch_id: branchId,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                window.location.href = response.redirect;
-                            }
-                        },
-                        error: function () {
-                            alert("Failed to switch branch.");
-                        }
-                    });
-                });
             });
         </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var message = "{{ session('message') }}";
+                var isError = "{{ session('error') }}";
+
+                // Prevent showing on back/forward nav
+                if (!window.performance || window.performance.navigation.type !== window.performance.navigation.TYPE_BACK_FORWARD) {
+                    if (message !== "") {
+                        if (isError === "1" || isError === "true") {
+                            notifier.show('Oops!', message, 'danger', "{{ asset('admin/assets/images/notification/high_priority-48.png') }}", 7000);
+                        } else {
+                            notifier.show('Success!', message, 'success', "{{ asset('admin/assets/images/notification/ok-48.png') }}", 7000);
+                        }
+                    }
+                }
+            });
+        </script>
+
 
     @yield('script')
     </body>>

@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\isAuthenticate;
 use App\Http\Middleware\isUnauthticate;
+use App\Http\Middleware\BranchSession;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;

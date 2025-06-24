@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
         }
         
         $user = Auth::user();
-        if ($user->status !== '1') {
+        if ($user->status !== '1' || $user->branch_id === null) {
             Auth::logout();
 
             throw ValidationException::withMessages([

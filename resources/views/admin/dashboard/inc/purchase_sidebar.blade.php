@@ -37,11 +37,11 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="side1">
                                         <ul class="sidemenu-list">
-                                            <li><a href="app-kanban.html" class="slide-item">Units</a></li>
-                                            <li><a href="app-kanban.html" class="slide-item">Categories</a></li>
-                                            <li><a href="app-kanban.html" class="slide-item">Brands</a></li>
-                                            <li><a href="calendar.html" class="slide-item">Warrenties</a></li>
-                                            <li><a href="calendar.html" class="slide-item">Products</a></li>
+                                            <li><a href="{{ route('units.index') }}" class="slide-item">Units</a></li>
+                                            <li><a href="{{ route('categories.index') }}" class="slide-item">Categories</a></li>
+                                            <li><a href="{{ route('brands.index') }}" class="slide-item">Brands</a></li>
+                                            <li><a href="{{ route('warranties.index') }}" class="slide-item">Warrenties</a></li>
+                                            <li><a href="{{ route('products.index') }}" class="slide-item">Products</a></li>
                                             <li><a href="app-calendar.html" class="slide-item">Suppliers</a></li>
                                         </ul>
                                     </div>

@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the user's branch ID.
+     *
+     * @return int|null
+     */
+    public function branchId() {
+        return $this->branch_id;
+    }
+
 }
